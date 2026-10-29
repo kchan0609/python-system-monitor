@@ -11,4 +11,13 @@ def main():
     print("RAM Usage:", ram, "%")
     print("Disk Usage:", disk, "%")
 
+    print("--------------------------")
+
+    if cpu >= 80:
+        print("CPU Status: High Usage!")
+    elif cpu >= 50:
+        print("CPU Status: Moderate")
+    else:
+        print("CPU Status: Normal")
+
 main()
