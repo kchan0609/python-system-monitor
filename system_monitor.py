@@ -20,4 +20,17 @@ def main():
     else:
         print("CPU Status: Normal")
 
+    if ram >= 80:
+        print("RAM Status: High Usage!")
+    elif ram >= 50:
+        print("RAM Status: Moderate")
+    else:
+        print("RAM Status: Normal")
+
+    if disk >= 80:
+        print("Disk Status: High Usage!")
+    elif disk >= 50:
+        print("Disk Status: Moderate")
+    else:
+        print("Disk Status: Normal")
 main()
