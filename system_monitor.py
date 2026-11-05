@@ -36,6 +36,18 @@ def check_performance():
     else:
         print("Disk Status: Normal")
 
+    # Save measurements to a text file
+    log = open("performance_log.txt", "a")
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+
+    log.write(
+        f"{timestamp} | CPU: {cpu}% | "
+        f"RAM: {ram}% | Disk: {disk}%\n"
+    )
+    log.close()
+
+    return cpu, ram
+
 
 def main():
     print("SYSTEM PERFORMANCE MONITOR")
@@ -46,23 +58,40 @@ def main():
     choice = input("Select an option: ")
 
     if choice == "1":
-        check_performance()
-
+        readings = 1
     elif choice == "2":
         readings = int(input("How many readings? "))
-
-        if readings > 0:
-            for i in range(readings):
-                print("\nReading", i + 1, "of", readings)
-                check_performance()
-
-                if i < readings - 1:
-                    time.sleep(4)
-        else:
-            print("Number of readings must be positive.")
-
     else:
         print("Invalid option.")
+        return
+
+    if readings <= 0:
+        print("Number of readings must be positive.")
+        return
+
+    cpu_history = []
+    ram_history = []
+
+    for i in range(readings):
+        print("\nReading", i + 1, "of", readings)
+
+        cpu, ram = check_performance()
+
+        cpu_history.append(cpu)
+        ram_history.append(ram)
+
+        if i < readings - 1:
+            time.sleep(4)
+
+    avg_cpu = sum(cpu_history) / len(cpu_history)
+    avg_ram = sum(ram_history) / len(ram_history)
+
+    print("\n--------------------------")
+    print("PERFORMANCE SUMMARY")
+    print("--------------------------")
+    print("Average CPU Usage:", round(avg_cpu, 2), "%")
+    print("Average RAM Usage:", round(avg_ram, 2), "%")
+    print("\nPerformance data saved successfully!")
 
 
 main()
