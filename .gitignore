@@ -1,0 +1,4 @@
+performance_log.txt
+__pycache__/
+*.pyc
+.venv/
