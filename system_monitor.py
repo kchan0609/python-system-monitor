@@ -60,7 +60,11 @@ def main():
     if choice == "1":
         readings = 1
     elif choice == "2":
-        readings = int(input("How many readings? "))
+        try:
+            readings = int(input("How many readings? "))
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
+            return
     else:
         print("Invalid option.")
         return
